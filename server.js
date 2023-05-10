@@ -1,14 +1,7 @@
 import express from "express";
-import {
-    getMessages,
-    postMessages,
-} from "./controllers/messages.controller.js";
 
-import {
-    getFriend,
-    getFriends,
-    postFriend,
-} from "./controllers/friends.controller.js";
+import friendsRouter from "./routes/friends.router.js";
+import messagesRouter from "./routes/messages.router.js";
 
 const app = express();
 
@@ -23,12 +16,9 @@ app.use((req, res, next) => {
 
 app.use(express.json());
 
-app.get("/friends", getFriends);
-app.post("/friends", postFriend);
-app.get("/friends/:friendId", getFriend);
+app.use("/friends", friendsRouter);
 
-app.get("/messages", getMessages);
-app.post("/messages", postMessages);
+app.use("/messages", messagesRouter);
 
 app.listen(PORT, () => {
     console.log(`Listening on ${PORT}`);
