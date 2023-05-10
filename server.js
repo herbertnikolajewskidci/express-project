@@ -1,4 +1,8 @@
 import express from "express";
+import path, { dirname } from "path";
+import { fileURLToPath } from "url";
+
+const __dirname = dirname(fileURLToPath(import.meta.url));
 
 import friendsRouter from "./routes/friends.router.js";
 import messagesRouter from "./routes/messages.router.js";
@@ -14,6 +18,7 @@ app.use((req, res, next) => {
     console.log(`${req.method} ${req.baseUrl}${req.url} ${delta}ms`);
 });
 
+app.use("/site", express.static(path.join(__dirname, "public")));
 app.use(express.json());
 
 app.use("/friends", friendsRouter);
