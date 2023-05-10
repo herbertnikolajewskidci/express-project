@@ -10,6 +10,13 @@ const friends = [
     { id: 2, name: "Nicola Tesla" },
 ];
 
+app.use((req, res, next) => {
+    const start = Date.now();
+    next();
+    const delta = Date.now() - start;
+    console.log(`${req.method} ${req.url} ${delta}ms`);
+});
+
 app.get("/friends", (req, res) => {
     res.json(friends);
 });
