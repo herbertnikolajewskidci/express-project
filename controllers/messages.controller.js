@@ -1,5 +1,12 @@
+import path, { dirname } from "path";
+import { fileURLToPath } from "url";
+
+const __dirname = dirname(fileURLToPath(import.meta.url));
+
 function getMessages(req, res) {
-    res.send("<ul><li>Helloo Albert!</li></ul>");
+    res.sendFile(
+        path.join(__dirname, "..", "public", "images", "skimountain.jpg")
+    );
 }
 
 function postMessages(req, res) {
